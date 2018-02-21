@@ -1,0 +1,8 @@
+{
+  "name": "youmall-admin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ywang04/youmall-admin-react.git",
+  "author": "Yang Wang <Yang.Wang04@gmail.com>",
+  "license": "MIT"
+}
