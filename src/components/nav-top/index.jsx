@@ -2,16 +2,16 @@
  * @Author: Yang 
  * @Date: 2018-03-07 15:01:53 
  * @Last Modified by: Yang
- * @Last Modified time: 2018-03-09 14:45:42
+ * @Last Modified time: 2018-03-21 09:54:40
  */
 
 
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class NavTop extends React.Component {
-  constructor() {
-    super()
+class NavTop extends Component {
+  constructor(props) {
+    super(props)
   }
   onLogout() {
 
@@ -25,8 +25,6 @@ class NavTop extends React.Component {
         </div>
 
         <ul className="nav navbar-top-links navbar-right">
-
-
           <li className="dropdown">
             <a className="dropdown-toggle" href="javascript:;" >
               <i className="fa fa-user fa-fw"></i>
@@ -41,7 +39,6 @@ class NavTop extends React.Component {
               </li>
             </ul>
           </li>
-
         </ul>
       </div>
     )
