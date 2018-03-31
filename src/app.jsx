@@ -1,16 +1,9 @@
-/*
- * @Author: Yang 
- * @Date: 2018-02-23 20:50:15 
- * @Last Modified by: Yang
- * @Last Modified time: 2018-03-08 11:26:43
- */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Home from 'page/home/index.jsx'
-import Layout from 'component/layout/index.jsx'
+import Home from 'pages/home/index.jsx'
+import Layout from 'components/layout/index.jsx'
 
 class App extends React.Component {
   render() {
@@ -19,7 +12,10 @@ class App extends React.Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Redirect from="*" to="/" />
+            <Route path="/product" component={Home} />
+            <Route path="/product-category" component={Home} />
+            <Route path="/orders" component={Home} />
+            <Route path="/buyers" component={Home} />
           </Switch>
         </Layout>
       </Router>
