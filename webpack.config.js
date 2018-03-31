@@ -2,7 +2,7 @@
  * @Author: Yang 
  * @Date: 2018-02-23 20:48:19 
  * @Last Modified by: Yang
- * @Last Modified time: 2018-02-25 15:45:32
+ * @Last Modified time: 2018-03-31 10:52:45
  */
 
 const path = require('path')
@@ -16,6 +16,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
     filename: 'js/app.js'
+  },
+  resolve: {
+    alias: {
+      pages: path.resolve(__dirname, 'src/pages'),
+      components: path.resolve(__dirname, 'src/components')
+    }
   },
   module: {
     rules: [
@@ -77,7 +83,8 @@ module.exports = {
   plugins: [
     // html
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      favicon: './favicon.ico'
     }),
     // css
     new ExtractTextPlugin('css/[name].css'),
@@ -88,6 +95,9 @@ module.exports = {
     })
   ],
   devServer: {
-    port: 8086
+    port: 8086,
+    historyApiFallback: {
+      index: '/dist/index.html'
+    }
   },
 }
