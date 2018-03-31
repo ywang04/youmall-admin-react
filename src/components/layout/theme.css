@@ -1,26 +1,22 @@
-/*
- * @Author: Yang 
- * @Date: 2018-03-06 12:24:21 
- * @Last Modified by: Yang
- * @Last Modified time: 2018-03-06 12:24:49
- */
-
-/*----------------------------------------------
-    COMMON  STYLES    
-------------------------------------------------*/
 body {
 	font-family: 'Open Sans', sans-serif;
+	background: #f3f3f3;
+}
+.login-panel{
+	margin-top: 25%;
+}
+
+.navbar-right .dropdown-toggle{
+	color: #666;
 }
 
 #wrapper {
 	width: 100%;
-	background: #2b2e33;
 }
 
 #page-wrapper {
-	padding: 15px 15px;
-	min-height: 600px;
-	background: #f3f3f3;
+	margin: 0 0 0 260px;
+	padding: 80px 30px;
 }
 
 #page-inner {
@@ -28,7 +24,7 @@ body {
 	margin: 10px 20px 10px 0px;
 	background-color: transparent;
 	padding: 10px;
-	min-height: 1200px;
+	min-height: 300px;
 }
 
 .text-center {
@@ -59,12 +55,6 @@ h4 {
 	border-radius: 0px;
 }
 
-p {
-	font-size: 16px;
-	line-height: 25px;
-	padding-top: 20px;
-}
-
 .panel {
 	border-radius: 0px;
 }
@@ -84,23 +74,19 @@ p {
 	-moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 }
+.top-navbar .navbar-right{
+	margin-right: 0;
+}
 
 .navbar-side {
 	z-index: 1;
 	position: fixed;
 	width: 260px;
-	top: 80px;
-}
-
-#page-wrapper {
-	position: relative;
-	top: 55px;
-}
-
-.top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
-	text-decoration: none;
-	background-color: #2497BA;
-	color: #fff;
+	top: 60px;
+	bottom: 0;
+	background: #2b2e33;
+	border: none;
+	overflow-y: auto;
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
@@ -116,7 +102,7 @@ p {
 	border-radius: 0;
 }
 /*----------------------------------------------
-   DASHBOARD STYLES    
+DASHBOARD STYLES    
 ------------------------------------------------*/
 .page-header {
 	padding-bottom: 9px;
@@ -290,7 +276,7 @@ p {
 	font-size: 16px;
 	line-height: 30px;
 }
-     /*CHAT PANEL*/
+	 /*CHAT PANEL*/
 /*Charts*/
 
 .main-chart {
@@ -377,7 +363,7 @@ footer p {
 	font-size: 14px;
 }
 /*----------------------------------------------
-    MENU STYLES    
+	MENU STYLES    
 ------------------------------------------------*/
 
 
@@ -394,7 +380,7 @@ footer p {
 	margin: 0px;
 }
 
-.top-navbar .navbar-brand {
+.top-navbar .navbar-brand, .top-navbar .navbar-brand:focus{
 	color: #fff;
 	width: 260px;
 	text-align: left;
@@ -404,17 +390,19 @@ footer p {
 	text-transform: uppercase;
 	line-height: 30px;
 	background: #32323a;
+	outline: none;
 }
 
 .navbar-brand b {
 	color: #2DAFCB;
+	margin-right: 6px;
 }
 
 .top-navbar .nav > li {
 	position: relative;
 	display: inline-block;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 10px;
 }
 
 .top-navbar .nav > li > a {
@@ -430,9 +418,20 @@ footer p {
 	color: #319DB5 !important;
 	background: transparent;
 }
+.top-navbar .dropdown:hover .dropdown-menu{
+	display: block;
+}
+.top-navbar .dropdown .dropdown-menu .dropdown-item{
+	cursor: pointer;
+}
+
+.top-navbar .nav > li:hover .dropdown-menu {
+	display: block;
+}
 
 .top-navbar .dropdown-menu {
 	min-width: 230px;
+	top: 98%;
 	border-radius: 0 0 4px 4px;
 }
 
@@ -529,22 +528,21 @@ ul.nav.nav-second-level.collapse.in {
 	outline: 0;
 }
 
-.navbar-side {
-	border: none;
-	background-color: transparent;
-}
-
 .top-navbar {
 	background: #fff;
 	border-bottom: none;
+	z-index: 1000;
 }
 
 .top-navbar .nav > li > a > i {
 	margin-right: 2px;
 }
-
+.top-navbar .nav > li > a > span {
+	color: #666;
+	margin-right: 5px;
+}
 .top-navbar .navbar-brand:hover {
-	color: #2DAFCB;
+	color: #fff;
 	background-color: rgb(43, 46, 51);
 }
 
@@ -577,7 +575,7 @@ ul.nav.nav-second-level.collapse.in {
 	color: #666;
 }
 /*----------------------------------------------
-    UI ELEMENTS STYLES     
+	UI ELEMENTS STYLES     
 ------------------------------------------------*/
 .btn-circle {
 	width: 50px;
@@ -592,31 +590,35 @@ ul.nav.nav-second-level.collapse.in {
 }
 
 /*----------------------------------------------
-    MEDIA QUERIES     
+	MEDIA QUERIES     
 ------------------------------------------------*/
- 
-@media(min-width:768px) {
-	#page-wrapper {
-		margin: 0 0 0 260px;
-		padding: 15px 30px;
-		min-height: 1200px;
-	}
-
+/*@media(min-width:768px) {
+	
 	.navbar-side {
-		z-index: 1;
-		width: 260px;
+					z-index: 1;
+					width: 260px;
 	}
-
 	.navbar {
-		border-radius: 0px;
+					border-radius: 0px;
+	}
+}*/
+
+@media(max-width:768px) {
+	#page-wrapper {
+					position: relative;
+					padding: 15px 15px;
+					top: 120px;
+					margin: 0;
+	}
+	.navbar-header{
+					position: relative;
+	}
+	.navbar-header .navbar-brand{
+					width: 100%;
+	}
+	.navbar-side{
+					position: relative;
+					width: 100%;
+					top: 120px;
 	}
 }
-
-@media(max-width:480px) {
-	.page-header small {
-		display: block;
-		padding-top: 14px;
-		font-size: 19px;
-	}
-}
-
