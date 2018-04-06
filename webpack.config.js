@@ -1,10 +1,3 @@
-/*
- * @Author: Yang 
- * @Date: 2018-02-23 20:48:19 
- * @Last Modified by: Yang
- * @Last Modified time: 2018-03-31 10:52:45
- */
-
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -20,7 +13,9 @@ module.exports = {
   resolve: {
     alias: {
       pages: path.resolve(__dirname, 'src/pages'),
-      components: path.resolve(__dirname, 'src/components')
+      components: path.resolve(__dirname, 'src/components'),
+      util: path.resolve(__dirname, 'src/util'),
+      service: path.resolve(__dirname, 'src/service'),
     }
   },
   module: {
@@ -98,6 +93,12 @@ module.exports = {
     port: 8086,
     historyApiFallback: {
       index: '/dist/index.html'
+    },
+    proxy: {
+      '/manage': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      }
     }
-  },
+  }
 }
