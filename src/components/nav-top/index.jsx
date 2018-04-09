@@ -1,20 +1,29 @@
-/*
- * @Author: Yang 
- * @Date: 2018-03-07 15:01:53 
- * @Last Modified by: Yang
- * @Last Modified time: 2018-03-21 09:54:40
- */
-
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Util from 'util/youmall.jsx'
+import User from 'service/login-service.jsx'
+
+const _util = new Util()
+const _user = new User()
 
 class NavTop extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      username: _util.getStorage('userInfo').username || ''
+    }
+    this.onLogout = this.onLogout.bind(this)
   }
-  onLogout() {
 
+  onLogout() {
+    _user.logout().then(
+      (res) => {
+        _util.removeStorage('userInfo')
+        window.location.href = '/login'
+      },
+      (err) => {
+        _util.errorTips(err)
+      })
   }
 
   render() {
@@ -28,12 +37,15 @@ class NavTop extends Component {
           <li className="dropdown">
             <a className="dropdown-toggle" href="javascript:;" >
               <i className="fa fa-user fa-fw"></i>
-              <span>Welcome, Admin</span>
+              {this.state.username
+                ? <span>Welcome, {this.state.username}</span>
+                : <span>Welcome</span>
+              }
               <i className="fa fa-caret-down"></i>
             </a>
             <ul className="dropdown-menu dropdown-user">
               <li>
-                <a onClick={this.onLogout.bind(this)} href="#"><i className="fa fa-sign-out fa-fw"></i>
+                <a onClick={this.onLogout} href="#"><i className="fa fa-sign-out fa-fw"></i>
                   <span>Logout</span>
                 </a>
               </li>
