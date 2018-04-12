@@ -1,4 +1,4 @@
-import Util from 'util/youmall.jsx'
+import Util from 'util/util.jsx'
 const _util = new Util()
 
 class User {
