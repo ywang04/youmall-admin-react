@@ -2,3 +2,8 @@
 node_modules
 dist
 *.log
+gift
+
+src/page/home/index.jsx
+
+src/page/home/index.jsx

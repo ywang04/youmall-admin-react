@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './index.scss'
-import Util from 'util/youmall.jsx'
+import Util from 'util/util.jsx'
 import User from 'service/login-service.jsx'
 
 const _util = new Util()
@@ -27,10 +27,8 @@ class Login extends Component {
     })
   }
 
-  onInputKeyUp(event) {
-    if (event.keyCode === 13) {
-      this.onHandleSubmit()
-    }
+  onFormSubmit(event) {
+    event.preventDefault()
   }
 
   onHandleSubmit() {
@@ -60,7 +58,7 @@ class Login extends Component {
         <div className="panel panel-default panel-login">
           <div className="panel-heading">YOU MALL - Management System</div>
           <div className="panel-body">
-            <div>
+            <form onSubmit={this.onFormSubmit}>
               <div className="form-group">
                 <input
                   value={this.state.username}
@@ -68,7 +66,6 @@ class Login extends Component {
                   type="text"
                   className="form-control"
                   placeholder="Username"
-                  onKeyUp={(event) => this.onInputKeyUp(event)}
                   onChange={(event) => { this.onInputChange(event) }} />
               </div>
 
@@ -79,7 +76,6 @@ class Login extends Component {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  onKeyUp={(event) => this.onInputKeyUp(event)}
                   onChange={(event) => { this.onInputChange(event) }} />
               </div>
 
@@ -89,7 +85,8 @@ class Login extends Component {
                 onClick={() => { this.onHandleSubmit() }}>
                 Sign In
               </button>
-            </div>
+
+            </form>
           </div>
         </div>
       </div>

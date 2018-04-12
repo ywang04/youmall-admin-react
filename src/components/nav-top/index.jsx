@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Util from 'util/youmall.jsx'
+import Util from 'util/util.jsx'
 import User from 'service/login-service.jsx'
 
 const _util = new Util()

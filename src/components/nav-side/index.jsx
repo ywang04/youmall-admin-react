@@ -13,23 +13,23 @@ class NavSide extends Component {
           <ul className="nav">
             <li>
               <NavLink exact activeClassName="active-menu" to="/">
-                <i className="fa fa-dashboard"></i>
+                <i className="fa fa-bar-chart-o"></i>
                 <span>Home</span>
               </NavLink>
             </li>
 
             <li className="active">
-              <Link to="/product">
-                <i className="fa fa-sitemap"></i>
+              <Link to="/item">
+                <i className="fa fa-list"></i>
                 <span>Items</span>
                 <span className="fa arrow"></span>
               </Link>
               <ul className="nav nav-second-level collapse in">
                 <li>
-                  <NavLink activeClassName="active-menu" to="/product">Items</NavLink>
+                  <NavLink activeClassName="active-menu" to="/item">Items</NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active-menu" to="/product-category" >Categories</NavLink>
+                  <NavLink activeClassName="active-menu" to="/item-category" >Categories</NavLink>
                 </li>
               </ul>
             </li>
@@ -37,7 +37,7 @@ class NavSide extends Component {
 
             <li className="active">
               <Link to="/order">
-                <i className="fa fa-sitemap"></i>
+                <i className="fa fa-check-square-o"></i>
                 <span>Orders</span>
                 <span className="fa arrow"></span>
               </Link>
@@ -51,7 +51,7 @@ class NavSide extends Component {
 
             <li className="active">
               <Link to="/user">
-                <i className="fa fa-sitemap"></i>
+                <i className="fa fa-user-o"></i>
                 <span>Users</span>
                 <span className="fa arrow"></span>
               </Link>
