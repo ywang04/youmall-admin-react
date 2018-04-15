@@ -43,7 +43,7 @@ class UserList extends Component {
   }
 
   render() {
-    let list = this.state.list.map((user, index) => {
+    let listBody = this.state.list.map((user, index) => {
       return (
         <tr key={user.id}>
           <td>{user.id}</td>
@@ -58,12 +58,12 @@ class UserList extends Component {
     let listLoading = (
       <tr>
         <td colSpan="5" className="text-center">
-          {this.state.initLoading ? 'Loading...' : 'No Results'}
+          {this.state.initLoading ? 'Loading...' : 'No Records...'}
         </td>
       </tr>
     )
 
-    let userList = this.state.list.length > 0 ? list : listLoading
+    let userList = this.state.list.length > 0 ? listBody : listLoading
 
     return (
       <div id="page-wrapper">
