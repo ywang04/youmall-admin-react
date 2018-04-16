@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PageTitle from 'components/page-title/index.jsx'
-import Util from 'util/util.jsx'
+import TableList from 'util/table-list/index.jsx'
 import Pagination from 'util/pagination/index.jsx'
+import Util from 'util/util.jsx'
 import GetUserList from 'service/user-list-service.jsx'
 
 const _util = new Util()
@@ -11,8 +12,7 @@ class UserList extends Component {
     super(props)
     this.state = {
       list: [],
-      pageNum: 1,
-      initLoading: true
+      pageNum: 1
     }
   }
 
@@ -23,7 +23,7 @@ class UserList extends Component {
   loadUserList() {
     GetUserList(this.state.pageNum).then(
       (res) => {
-        this.setState(res, () => { this.setState({ initLoading: false }) })
+        this.setState(res)
       },
       (errMsg) => {
         this.setState({
@@ -54,40 +54,12 @@ class UserList extends Component {
         </tr>
       )
     })
-
-    let listLoading = (
-      <tr>
-        <td colSpan="5" className="text-center">
-          {this.state.initLoading ? 'Loading...' : 'No Records...'}
-        </td>
-      </tr>
-    )
-
-    let userList = this.state.list.length > 0 ? listBody : listLoading
-
     return (
       <div id="page-wrapper">
         <PageTitle title="User List" />
-        <div className="row">
-          <div className="col-md-10">
-            <table className="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Registration Date</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {userList}
-              </tbody>
-            </table>
-
-          </div>
-        </div>
+        <TableList tableHeaders={['ID', 'Username', 'Email', 'Phone', 'Registration Date']}>
+          {listBody}
+        </TableList>
         <Pagination
           current={this.state.pageNum}
           total={this.state.total}
