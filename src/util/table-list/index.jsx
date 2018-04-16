@@ -16,11 +16,20 @@ class TableList extends Component {
 
   render() {
     let tableHeaders = this.props.tableHeaders.map((tableHeader, index) => {
-      return (
-        <th key={index}>
-          {tableHeader}
-        </th >
-      )
+
+      if (typeof tableHeader === 'object') {
+        return (
+          <th key={index} width={tableHeader.width}>
+            {tableHeader.name}
+          </th >
+        )
+      } else if (typeof tableHeader === 'string') {
+        return (
+          <th key={index}>
+            {tableHeader}
+          </th >
+        )
+      }
     })
 
     let listBody = this.props.children
@@ -37,7 +46,7 @@ class TableList extends Component {
 
     return (
       <div className="row" >
-        <div className="col-md-10">
+        <div className="col-md-12">
           <table className="table table-striped table-bordered">
             <thead>
               <tr>
