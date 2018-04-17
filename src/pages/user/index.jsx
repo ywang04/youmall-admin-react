@@ -54,10 +54,19 @@ class UserList extends Component {
         </tr>
       )
     })
+
+    let tableHeaders = [
+      { name: 'ID', width: '10%' },
+      { name: 'Username', width: '20%' },
+      { name: 'Email', width: '20%' },
+      { name: 'Phone', width: '20%' },
+      { name: 'Registration Date', width: '20%' }
+    ]
+
     return (
       <div id="page-wrapper">
         <PageTitle title="User List" />
-        <TableList tableHeaders={['ID', 'Username', 'Email', 'Phone', 'Registration Date']}>
+        <TableList tableHeaders={tableHeaders}>
           {listBody}
         </TableList>
         <Pagination
