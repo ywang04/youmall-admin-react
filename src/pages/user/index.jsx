@@ -34,7 +34,7 @@ class UserList extends Component {
     )
   }
 
-  onChangePageNum(pageNum) {
+  onPageNumChange(pageNum) {
     this.setState({
       pageNum: pageNum
     }, () => {
@@ -72,7 +72,7 @@ class UserList extends Component {
         <Pagination
           current={this.state.pageNum}
           total={this.state.total}
-          onChange={(pageNum) => { this.onChangePageNum(pageNum) }} />
+          onChange={(pageNum) => { this.onPageNumChange(pageNum) }} />
       </div>)
   }
 }
