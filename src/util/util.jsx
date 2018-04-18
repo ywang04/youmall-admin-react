@@ -5,8 +5,12 @@ class Util {
     window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname)
   }
 
+  successTips(successMsg) {
+    alert(successMsg || 'Successful!')
+  }
+
   errorTips(errMsg) {
-    alert(errMsg || 'Wrong!')
+    alert(errMsg || 'Failed!')
   }
 
   getUrlParam(param) {
