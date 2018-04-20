@@ -1,5 +1,6 @@
 import React from 'react'
 import Util from 'util/util.jsx'
+
 const _util = new Util()
 
 const GetUserList = (pageNum) => {
