@@ -31,7 +31,7 @@ class Login extends Component {
     event.preventDefault()
   }
 
-  onHandleSubmit() {
+  onButtonSubmit() {
     let loginInfo = {
       username: this.state.username,
       password: this.state.password
@@ -82,7 +82,7 @@ class Login extends Component {
               <button
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"
-                onClick={() => { this.onHandleSubmit() }}>
+                onClick={() => { this.onButtonSubmit() }}>
                 Sign In
               </button>
 
