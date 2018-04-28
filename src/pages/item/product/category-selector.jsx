@@ -8,8 +8,8 @@ class CategorySelector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedPrimaryId: '',
-      selectedSecondaryId: '',
+      primaryId: '',
+      secondaryId: '',
       primaryCategoryList: [],
       secondaryCategoryList: []
     }
@@ -33,7 +33,7 @@ class CategorySelector extends Component {
   }
 
   loadSecondaryCategoryList() {
-    _item.getCategoryList(this.state.selectedPrimaryId).then(
+    _item.getCategoryList(this.state.primaryId).then(
       (res) => {
         this.setState({
           secondaryCategoryList: res
@@ -47,8 +47,8 @@ class CategorySelector extends Component {
 
   onPrimaryCategoryChange(event) {
     this.setState({
-      selectedPrimaryId: event.target.value,
-      selectedSecondaryId: '',
+      primaryId: event.target.value,
+      secondaryId: '',
       secondaryCategoryList: []
     }, () => {
       this.loadSecondaryCategoryList()
@@ -58,17 +58,17 @@ class CategorySelector extends Component {
 
   onSecondaryCategoryChange(event) {
     this.setState({
-      selectedSecondaryId: event.target.value
+      secondaryId: event.target.value
     }, () => { this.onPropsCategoryChange() })
   }
 
   onPropsCategoryChange() {
     let isExecuted = typeof this.props.onCategoryChange === 'function'
-    if (this.state.selectedSecondaryId) {
-      isExecuted && this.props.onCategoryChange(this.state.selectedSecondaryId, this.state.selectedPrimaryId, )
+    if (this.state.secondaryId) {
+      isExecuted && this.props.onCategoryChange(this.state.secondaryId, this.state.primaryId, )
     }
     else {
-      isExecuted && this.props.onCategoryChange(this.state.selectedPrimaryId, 0)
+      isExecuted && this.props.onCategoryChange(this.state.primaryId, 0)
     }
   }
 
@@ -93,7 +93,7 @@ class CategorySelector extends Component {
           {primaryList}
         </select>
 
-        {this.state.selectedPrimaryId ? (<select className="form-control category-selector"
+        {this.state.primaryId ? (<select className="form-control category-selector"
           onChange={(event) => { this.onSecondaryCategoryChange(event) }}>
           <option value="">Choose Secondary Category</option>
           {secondaryList}

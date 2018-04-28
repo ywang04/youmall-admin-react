@@ -17,13 +17,12 @@ class Editor extends Component {
       textarea: $(element),
       defaultValue: this.props.placeholder,
       upload: {
-        url: '',
+        url: '/manage/product/richtext_img_upload.do',
         defaultImage: '',
         fileKey: 'upload_file'
       }
     })
     this.bindEditorEvent()
-
   }
 
   bindEditorEvent() {
@@ -36,7 +35,6 @@ class Editor extends Component {
     return (
       <div className="editor">
         <textarea ref="textarea"></textarea>
-
       </div>
     )
   }
