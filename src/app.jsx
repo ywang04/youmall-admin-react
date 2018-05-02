@@ -7,6 +7,8 @@ import Layout from 'components/layout/index.jsx'
 import Login from 'pages/login/index.jsx'
 import ErrorPage from 'pages/error/index.jsx'
 import UserList from 'pages/user/index.jsx'
+import ItemRouter from 'pages/item/router.jsx'
+import OrderList from 'pages/order/index.jsx'
 
 class App extends Component {
   render() {
@@ -15,9 +17,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/user" component={UserList} />
-          <Route path="/item" component={Home} />
-          <Route path="/item-category" component={Home} />
-          <Route path="/order" component={Home} />
+          <Route path="/item" component={ItemRouter} />
+          <Route path="/item-category" component={ItemRouter} />
+          <Route path="/order" component={OrderList} />
           <Route component={ErrorPage} />
         </Switch>
       </Layout>

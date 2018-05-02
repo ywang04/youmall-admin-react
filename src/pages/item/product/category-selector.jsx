@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Item from 'service/item-service.jsx'
-import './category-selector.scss'
-
+import Util from 'util/util.jsx'
 const _item = new Item()
+const _util = new Util()
+import './category-selector.scss'
 
 class CategorySelector extends Component {
   constructor(props) {
@@ -19,7 +20,36 @@ class CategorySelector extends Component {
     this.loadPrimaryCategoryList()
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps in category.')
+    console.log('this.props is:', this.props)
+    console.log('nextProps is:', nextProps)
+    let categoryIdChange = this.props.categoryId !== nextProps.categoryId
+    let parentCategoryIdChange = this.props.parentCategoryId !== nextProps.parentCategoryId
+    if (!categoryIdChange && !parentCategoryIdChange) {
+      console.log('ignore')
+      return
+    }
+    if (nextProps.parentCategoryId === 0) {
+      this.setState({
+        primaryId: nextProps.categoryId,
+        secondaryId: ''
+      })
+    }
+    else {
+      this.setState({
+        primaryId: nextProps.parentCategoryId,
+        secondaryId: nextProps.categoryId
+      },
+      () => {
+        parentCategoryIdChange && this.loadSecondaryCategoryList()
+      }
+      )
+    }
+  }
+
   loadPrimaryCategoryList() {
+    console.log('loadPrimaryCategoryList')
     _item.getCategoryList().then(
       (res) => {
         this.setState({
@@ -46,8 +76,13 @@ class CategorySelector extends Component {
   }
 
   onPrimaryCategoryChange(event) {
+    console.log('onPrimaryCategoryChange')
+    if (this.props.readOnly) {
+      return
+    }
+    let newValue = event.target.value
     this.setState({
-      primaryId: event.target.value,
+      primaryId: newValue,
       secondaryId: '',
       secondaryCategoryList: []
     }, () => {
@@ -57,15 +92,21 @@ class CategorySelector extends Component {
   }
 
   onSecondaryCategoryChange(event) {
+    console.log('onSecondaryCategoryChange')
+    if (this.props.readOnly) {
+      return
+    }
+    let newValue = event.target.value
     this.setState({
-      secondaryId: event.target.value
+      secondaryId: newValue
     }, () => { this.onPropsCategoryChange() })
   }
 
   onPropsCategoryChange() {
+    console.log('onPropsCategoryChange')
     let isExecuted = typeof this.props.onCategoryChange === 'function'
     if (this.state.secondaryId) {
-      isExecuted && this.props.onCategoryChange(this.state.secondaryId, this.state.primaryId, )
+      isExecuted && this.props.onCategoryChange(this.state.secondaryId, this.state.primaryId)
     }
     else {
       isExecuted && this.props.onCategoryChange(this.state.primaryId, 0)
@@ -88,16 +129,21 @@ class CategorySelector extends Component {
     return (
       <div className="col-md-10">
         <select className="form-control category-selector"
+          readOnly={this.props.readOnly}
+          value={this.state.primaryId}
           onChange={(event) => { this.onPrimaryCategoryChange(event) }}>
           <option value="">Choose Primary Category</option>
           {primaryList}
         </select>
 
-        {this.state.primaryId ? (<select className="form-control category-selector"
-          onChange={(event) => { this.onSecondaryCategoryChange(event) }}>
-          <option value="">Choose Secondary Category</option>
-          {secondaryList}
-        </select>) : null}
+        {this.state.primaryId ?
+          <select className="form-control category-selector"
+            readOnly={this.props.readOnly}
+            value={this.state.secondaryId}
+            onChange={(event) => { this.onSecondaryCategoryChange(event) }}>
+            <option value="">Choose Secondary Category</option>
+            {secondaryList}
+          </select> : null}
 
       </div>
     )
