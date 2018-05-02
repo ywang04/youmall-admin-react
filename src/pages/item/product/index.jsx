@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PageTitle from 'components/page-title/index.jsx'
-import SearchBar from 'components/search-bar/index.jsx'
+import SearchBar from './search-bar.jsx'
 import TableList from 'util/table-list/index.jsx'
 import Pagination from 'util/pagination/index.jsx'
 import Item from 'service/item-service.jsx'
