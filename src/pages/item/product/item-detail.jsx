@@ -33,32 +33,30 @@ class ItemDetail extends Component {
 
   loadDetailInfo() {
     console.log('loadDetailInfo')
-    if (this.state.productId) {
-      _item.getDetailInfo(this.state.productId).then(
-        (res) => {
-          console.log('res is:', res)
-          console.log(typeof res.subImages)
-          console.log('subImages is:', res.subImages)
-          res.defaultDetail = res.detail
-          if (res.subImages) {
-            let imgList = res.subImages.split(',')
-            res.subImages = imgList.map((img) => {
-              return {
-                uri: img,
-                url: res.imageHost + img
-              }
-            })
-            this.setState(res)
-          }
-          else {
-            res.subImages = res.subImages.split('')
-            this.setState(res)
-          }
-        },
-        (errMsg) => {
-          _util.errorTips(errMsg)
-        })
-    }
+    _item.getDetailInfo(this.state.productId).then(
+      (res) => {
+        console.log('res is:', res)
+        console.log(typeof res.subImages)
+        console.log('subImages is:', res.subImages)
+        res.defaultDetail = res.detail
+        if (res.subImages) {
+          let imgList = res.subImages.split(',')
+          res.subImages = imgList.map((img) => {
+            return {
+              uri: img,
+              url: res.imageHost + img
+            }
+          })
+          this.setState(res)
+        }
+        else {
+          res.subImages = res.subImages.split('')
+          this.setState(res)
+        }
+      },
+      (errMsg) => {
+        _util.errorTips(errMsg)
+      })
   }
 
   render() {
