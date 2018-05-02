@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Util from 'util/util.jsx'
-import User from 'service/login-service.jsx'
+import UserLogin from 'service/login-service.jsx'
 
 const _util = new Util()
-const _user = new User()
+const _user = new UserLogin()
 
 class NavTop extends Component {
   constructor(props) {
