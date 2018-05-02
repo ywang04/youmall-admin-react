@@ -1,7 +1,7 @@
 import Util from 'util/util.jsx'
 const _util = new Util()
 
-class User {
+class UserLogin {
   login(loginInfo) {
     return _util.request({
       method: 'post',
@@ -39,4 +39,4 @@ class User {
   }
 }
 
-export default User
+export default UserLogin
