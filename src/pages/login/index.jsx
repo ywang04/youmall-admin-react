@@ -44,7 +44,10 @@ class Login extends Component {
           this.props.history.push(this.state.redirect)
         },
         (errMsg) => {
-          _util.errorTips(errMsg)
+          if (errMsg === '密码错误') {
+            errMsg = 'Invalid  Username or Password.'
+            _util.errorTips(errMsg)
+          }
         }
       )
     } else {
