@@ -83,7 +83,7 @@ class ItemList extends Component {
         <tr key={item.id}>
           <td>{item.id}</td>
           <td>{item.name}</td>
-          <td>${item.price}</td>
+          <td>$ {item.price}</td>
           <td>
             <span id="id-span-status">{
               item.status === 1 ? 'Active' : 'Inactive'
