@@ -17,7 +17,7 @@ class ItemList extends Component {
     this.state = {
       list: [],
       pageNum: 1,
-      listType: 'load'
+      loadType: 'list'
     }
   }
 
@@ -26,14 +26,7 @@ class ItemList extends Component {
   }
 
   loadItemList() {
-    let listParam = {}
-    listParam.pageNum = this.state.pageNum
-    listParam.listType = this.state.listType
-    if (this.state.listType === 'search') {
-      listParam.searchType = this.state.searchType
-      listParam.searchKeyword = this.state.searchKeyword
-    }
-    _item.getItemList(listParam).then((res) => {
+    _item.getItemList(this.state).then((res) => {
       this.setState(res)
     }, (errMsg) => {
       this.setState({ list: [] })
@@ -42,9 +35,9 @@ class ItemList extends Component {
   }
 
   onButtonSearch(searchType, searchKeyword) {
-    let listType = searchKeyword === '' ? 'load' : 'search'
+    let loadType = searchKeyword === '' ? 'list' : 'search'
     this.setState({
-      listType: listType,
+      loadType: loadType,
       pageNum: 1,
       searchType: searchType,
       searchKeyword: searchKeyword
@@ -69,9 +62,9 @@ class ItemList extends Component {
     }
   }
 
-  onPageNumChange(pageNum) {
+  onPageNumChange(current) {
     this.setState({
-      pageNum: pageNum
+      pageNum: current
     }, () => {
       this.loadItemList()
     })
@@ -139,9 +132,10 @@ class ItemList extends Component {
         <TableList tableHeaders={tableHeaders}>
           {listBody}
         </TableList>
-        <Pagination current={this.state.pageNum} total={this.state.total} onChange={(pageNum) => {
-          this.onPageNumChange(pageNum)
-        }} />
+        <Pagination
+          current={this.state.pageNum}
+          total={this.state.total}
+          onChange={(current) => { this.onPageNumChange(current) }} />
       </div >
     )
   }
