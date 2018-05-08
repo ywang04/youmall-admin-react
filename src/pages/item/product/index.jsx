@@ -30,6 +30,9 @@ class ItemList extends Component {
       this.setState(res)
     }, (errMsg) => {
       this.setState({ list: [] })
+      if (errMsg === 'Bad Request') {
+        errMsg = 'Item does not exist.'
+      }
       _util.errorTips(errMsg)
     })
   }
