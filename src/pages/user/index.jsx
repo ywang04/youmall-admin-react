@@ -30,8 +30,7 @@ class UserList extends Component {
           list: []
         })
         _util.errorTips(errMsg)
-      }
-    )
+      })
   }
 
   onPageNumChange(pageNum) {

@@ -18,26 +18,42 @@ class OrderList extends Component {
       list: [],
       loadType: 'list'  //list or search
     }
+    this.loadingData = null
   }
 
   componentDidMount() {
+    this.loadingData = _util.makeCancelablePromise(
+      _order.getOrderList(this.state)
+    )
     this.loadOrderList()
   }
 
+  componentWillUnmount() {
+    if (this.loadingData) {
+      this.loadingData.cancel()
+    }
+  }
+
   loadOrderList() {
-    _order.getOrderList(this.state).then(
+    this.loadingData.promise.then(
       (res) => {
         this.setState(res)
       },
-      (errMsg) => {
-        this.setState({
-          list: []
-        })
-        if (errMsg === '订单不存在') {
-          errMsg = 'Order does not exist.'
+      (err) => {
+        if (err.isCanceled) {
+          console.log('test')
+          return
+        } else {
+          this.setState({
+            list: []
+          })
+          if (err === '订单不存在') {
+            err = 'Order does not exist.'
+          }
+          _util.errorTips(err)
         }
-        _util.errorTips(errMsg)
-      })
+      }
+    )
   }
 
   onButtonSearch(orderNo) {

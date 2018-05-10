@@ -48,27 +48,53 @@ class Util {
   }
 
   request(param) {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        method: param.method || 'get',
-        url: param.url || '',
-        dataType: param.dataType || 'json',
-        data: param.data || null,
-        success: (res) => {
-          if (0 === res.status) {
-            typeof resolve === 'function' && resolve(res.data, res.msg)
-          } else if (10 === res.status) {
-            this.doLogin()
-          } else {
-            typeof reject === 'function' && reject(res.msg || res.data)
+    return new Promise(
+      (resolve, reject) => {
+        $.ajax({
+          method: param.method || 'get',
+          url: param.url || '',
+          dataType: param.dataType || 'json',
+          data: param.data || null,
+          success: (res) => {
+            if (0 === res.status) {
+              typeof resolve === 'function' && resolve(res.data, res.msg)
+            } else if (10 === res.status) {
+              this.doLogin()
+            } else {
+              typeof reject === 'function' && reject(res.msg || res.data)
+            }
+          },
+          error: (err) => {
+            typeof reject === 'function' && reject(err.statusText)
           }
-        },
-        error: (err) => {
-          typeof reject === 'function' && reject(err.statusText)
-        }
-      })
-    })
+        })
+      }
+    )
   }
+
+  makeCancelablePromise(promise) {
+    let hasCanceled_ = false
+    const wrappedPromise = new Promise(
+      (resolve, reject) => {
+        promise.then(
+          (val) => {
+            hasCanceled_ ? reject({ isCanceled: true }) : resolve(val)
+          },
+          (error) => {
+            hasCanceled_ ? reject({ isCanceled: true }) : reject(error)
+          }
+        )
+      }
+    )
+    return {
+      promise: wrappedPromise,
+      cancel() {
+        hasCanceled_ = true
+      },
+    }
+  }
+
+
 }
 
 
