@@ -6,6 +6,7 @@ import SearchBar from 'pages/order/search-bar.jsx'
 import TableList from 'util/table-list/index.jsx'
 import Pagination from 'util/pagination/index.jsx'
 import Util from 'util/util.jsx'
+import makeCancelbalePromise from '../../util/cancelablePromise'
 
 const _util = new Util()
 const _order = new Order()
@@ -18,14 +19,24 @@ class OrderList extends Component {
       list: [],
       loadType: 'list'  //list or search
     }
+    this.loadingData = null;
   }
 
   componentDidMount() {
+    this.loadingData = makeCancelbalePromise(
+      _order.getOrderList(this.state)
+    );
     this.loadOrderList()
   }
 
+  componentWillUnmount() {
+    if (this.loadingData) {
+      this.loadingData.cancel();
+    }
+  }
+
   loadOrderList() {
-    _order.getOrderList(this.state).then(
+    this.loadingData.promise.then(
       (res) => {
         this.setState(res)
       },
