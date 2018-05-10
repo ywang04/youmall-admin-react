@@ -40,14 +40,19 @@ class OrderList extends Component {
       (res) => {
         this.setState(res)
       },
-      (errMsg) => {
-        this.setState({
-          list: []
-        })
-        if (errMsg === '订单不存在') {
-          errMsg = 'Order does not exist.'
+      (err) => {
+        if (err.isCanceled) {
+          console.log('promise canceled')
+          return;
+        } else {
+          this.setState({
+            list: []
+          })
+          if (err === '订单不存在') {
+            err = 'Order does not exist.'
+          }
+          _util.errorTips(err)
         }
-        _util.errorTips(errMsg)
       })
   }
 
