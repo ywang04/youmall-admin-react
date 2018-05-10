@@ -33,13 +33,9 @@ class ItemAdd extends Component {
   }
 
   loadDetailInfo() {
-    console.log('loadDetailInfo')
     if (this.state.productId) {
       _item.getDetailInfo(this.state.productId).then(
         (res) => {
-          console.log('res is:', res)
-          console.log(typeof res.subImages)
-          console.log('subImages is:', res.subImages)
           res.defaultDetail = res.detail
           if (res.subImages) {
             let imgList = res.subImages.split(',')
@@ -103,7 +99,6 @@ class ItemAdd extends Component {
   }
 
   onEditorValueChange(value) {
-    console.log('onEditorValueChange')
     this.setState({
       detail: value
     })
@@ -153,9 +148,9 @@ class ItemAdd extends Component {
           <form className="form-horizontal" onSubmit={this.onFormSubmit}>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Name</label>
+              <label htmlFor="id-name" className="col-md-2 control-label">Name</label>
               <div className="col-md-5">
-                <input type="text" className="form-control" id="" placeholder="Please enter item name"
+                <input type="text" className="form-control" id="id-name" placeholder="Please enter item name"
                   name="name"
                   value={this.state.name}
                   onChange={(event) => { this.onInputChange(event) }} />
@@ -163,9 +158,9 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Description</label>
+              <label htmlFor="id-description" className="col-md-2 control-label">Description</label>
               <div className="col-md-5">
-                <input type="text" className="form-control" id="" placeholder="Please enter item description"
+                <input type="text" className="form-control" id="id-description" placeholder="Please enter item description"
                   name="subtitle"
                   value={this.state.subtitle}
                   onChange={(event) => { this.onInputChange(event) }} />
@@ -173,7 +168,7 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Category</label>
+              <label htmlFor="id-category" className="col-md-2 control-label">Category</label>
               <CategorySelector
                 categoryId={this.state.categoryId}
                 parentCategoryId={this.state.parentCategoryId}
@@ -183,11 +178,11 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Price</label>
+              <label htmlFor="id-price" className="col-md-2 control-label">Price</label>
               <div className="col-md-3">
                 <div className="input-group">
                   <span className="input-group-addon">$</span>
-                  <input type="number" className="form-control" id="" placeholder="Price"
+                  <input type="number" className="form-control" id="id-price" placeholder="Price"
                     name="price"
                     value={this.state.price}
                     onChange={(event) => { this.onInputChange(event) }} />
@@ -196,9 +191,9 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Stock</label>
+              <label htmlFor="id-stock" className="col-md-2 control-label">Stock</label>
               <div className="col-md-3">
-                <input type="number" className="form-control" id="" placeholder="Stock"
+                <input type="number" className="form-control" id="id-stock" placeholder="Stock"
                   name="stock"
                   value={this.state.stock}
                   onChange={(event) => { this.onInputChange(event) }} />
@@ -206,7 +201,7 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Images</label>
+              <label className="col-md-2 control-label">Images</label>
               <div className="col-md-10">
                 {
                   this.state.subImages.length ? this.state.subImages.map((subImg, index) => {
@@ -229,7 +224,7 @@ class ItemAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Details</label>
+              <label className="col-md-2 control-label">Details</label>
               <div className="col-md-10">
                 <Editor
                   detail={this.state.detail}

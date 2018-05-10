@@ -9,9 +9,6 @@ class Editor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps in editor')
-    console.log('nextProps.defaultDetail is:', nextProps.defaultDetail)
-    console.log('this.props.defaultDetail is:', this.props.defaultDetail)
     if (this.props.defaultDetail !== nextProps.defaultDetail) {
       this.simditor.setValue(nextProps.defaultDetail)
     }

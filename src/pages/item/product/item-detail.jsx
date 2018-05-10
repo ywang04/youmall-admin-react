@@ -32,12 +32,8 @@ class ItemDetail extends Component {
   }
 
   loadDetailInfo() {
-    console.log('loadDetailInfo')
     _item.getDetailInfo(this.state.productId).then(
       (res) => {
-        console.log('res is:', res)
-        console.log(typeof res.subImages)
-        console.log('subImages is:', res.subImages)
         res.defaultDetail = res.detail
         if (res.subImages) {
           let imgList = res.subImages.split(',')

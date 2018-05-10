@@ -52,7 +52,8 @@ class CategoryAdd extends Component {
       _category.addCategory(this.state).then(
         (res) => {
           _util.successTips('Add category successfully.')
-          window.location.href = '/item-category/index'
+          this.props.history.push('/item-category/index')
+          // window.location.href = '/item-category/index'
         },
         (errMsg) => {
           if (errMsg === '添加品类参数错误') {
@@ -80,9 +81,10 @@ class CategoryAdd extends Component {
           <form className="form-horizontal" onSubmit={this.onFormSubmit}>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Category</label>
+              <label htmlFor="id-category" className="col-md-2 control-label">Category</label>
               <div className="col-md-3">
                 <select
+                  id="id-category"
                   className="form-control"
                   name="parentCategoryId"
                   onChange={(event) => { this.onValueChange(event) }}>
@@ -93,13 +95,13 @@ class CategoryAdd extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="" className="col-md-2 control-label">Name</label>
+              <label htmlFor="id-name" className="col-md-2 control-label">Name</label>
               <div className="col-md-3">
                 <input
+                  id="id-name"
                   name="categoryName"
                   type="text"
                   className="form-control"
-                  id=""
                   onChange={(event) => this.onValueChange(event)}
                   placeholder="Please enter category name" />
               </div>

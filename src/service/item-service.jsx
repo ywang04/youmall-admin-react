@@ -4,23 +4,21 @@ import Util from 'util/util.jsx'
 const _util = new Util()
 
 class Item extends Component {
-  getItemList(listParam) {
-    let url, method
+  getItemList({ loadType, pageNum, searchType, searchKeyword }) {
+    let url
     let data = {}
-    if (listParam.listType === 'load') {
+    if (loadType === 'list') {
       url = '/manage/product/list.do'
-      method = 'get'
-      data.pageNum = listParam.pageNum
+      data = { pageNum }
     }
-    else if (listParam.listType === 'search') {
+    else if (loadType === 'search') {
       url = '/manage/product/search.do'
-      method = 'post'
-      data.pageNum = listParam.pageNum
-      data[listParam.searchType] = listParam.searchKeyword
+      data.pageNum = pageNum
+      data[searchType] = searchKeyword
     }
     return _util.request({
       url: url,
-      method: method,
+      method: 'post',
       data: data
     })
   }

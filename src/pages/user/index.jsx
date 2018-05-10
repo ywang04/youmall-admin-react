@@ -3,7 +3,7 @@ import PageTitle from 'components/page-title/index.jsx'
 import TableList from 'util/table-list/index.jsx'
 import Pagination from 'util/pagination/index.jsx'
 import Util from 'util/util.jsx'
-import GetUserList from 'service/user-list-service.jsx'
+import GetUserList from 'service/user-service.jsx'
 
 const _util = new Util()
 

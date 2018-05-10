@@ -21,13 +21,9 @@ class CategorySelector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps in category.')
-    console.log('this.props is:', this.props)
-    console.log('nextProps is:', nextProps)
     let categoryIdChange = this.props.categoryId !== nextProps.categoryId
     let parentCategoryIdChange = this.props.parentCategoryId !== nextProps.parentCategoryId
     if (!categoryIdChange && !parentCategoryIdChange) {
-      console.log('ignore')
       return
     }
     if (nextProps.parentCategoryId === 0) {
@@ -49,7 +45,6 @@ class CategorySelector extends Component {
   }
 
   loadPrimaryCategoryList() {
-    console.log('loadPrimaryCategoryList')
     _item.getCategoryList().then(
       (res) => {
         this.setState({
@@ -76,7 +71,6 @@ class CategorySelector extends Component {
   }
 
   onPrimaryCategoryChange(event) {
-    console.log('onPrimaryCategoryChange')
     if (this.props.readOnly) {
       return
     }
@@ -92,7 +86,6 @@ class CategorySelector extends Component {
   }
 
   onSecondaryCategoryChange(event) {
-    console.log('onSecondaryCategoryChange')
     if (this.props.readOnly) {
       return
     }
@@ -103,7 +96,6 @@ class CategorySelector extends Component {
   }
 
   onPropsCategoryChange() {
-    console.log('onPropsCategoryChange')
     let isExecuted = typeof this.props.onCategoryChange === 'function'
     if (this.state.secondaryId) {
       isExecuted && this.props.onCategoryChange(this.state.secondaryId, this.state.primaryId)
@@ -128,7 +120,9 @@ class CategorySelector extends Component {
 
     return (
       <div className="col-md-10">
-        <select className="form-control category-selector"
+        <select
+          id="id-category"
+          className="form-control category-selector"
           readOnly={this.props.readOnly}
           value={this.state.primaryId}
           onChange={(event) => { this.onPrimaryCategoryChange(event) }}>
@@ -137,7 +131,9 @@ class CategorySelector extends Component {
         </select>
 
         {this.state.primaryId ?
-          <select className="form-control category-selector"
+          <select
+            id="id-category"
+            className="form-control category-selector"
             readOnly={this.props.readOnly}
             value={this.state.secondaryId}
             onChange={(event) => { this.onSecondaryCategoryChange(event) }}>

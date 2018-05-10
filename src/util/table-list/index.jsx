@@ -16,7 +16,6 @@ class TableList extends Component {
 
   render() {
     let tableHeaders = this.props.tableHeaders.map((tableHeader, index) => {
-
       if (typeof tableHeader === 'object') {
         return (
           <th key={index} width={tableHeader.width}>
@@ -61,7 +60,6 @@ class TableList extends Component {
           </table>
         </div>
       </div>
-
     )
   }
 }

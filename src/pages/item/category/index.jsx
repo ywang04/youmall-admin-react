@@ -22,11 +22,8 @@ class CategoryList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate')
     let preId = prevProps.match.params.id
     let curId = this.props.match.params.id
-    console.log('preId is:', preId)
-    console.log('curId is:', curId)
     if (preId !== curId) {
       this.setState({
         parentCategoryId: curId || 0
@@ -37,7 +34,6 @@ class CategoryList extends Component {
   loadCategoryList() {
     _category.getCategoryList(this.state).then(
       (res) => {
-        console.log(res)
         this.setState({
           list: res
         })
