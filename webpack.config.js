@@ -10,7 +10,7 @@ module.exports = {
   entry: './src/app.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//s.youmall.co/youmall-admin/dist',
+    publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//s.youmall.co/youmall-admin-react/dist',
     filename: 'js/app.js'
   },
   resolve: {
