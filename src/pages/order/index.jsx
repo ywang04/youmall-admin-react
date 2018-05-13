@@ -18,13 +18,9 @@ class OrderList extends Component {
       list: [],
       loadType: 'list'  //list or search
     }
-    this.loadingData = null
   }
 
   componentDidMount() {
-    this.loadingData = _util.makeCancelablePromise(
-      _order.getOrderList(this.state)
-    )
     this.loadOrderList()
   }
 
@@ -35,13 +31,15 @@ class OrderList extends Component {
   }
 
   loadOrderList() {
-    this.loadingData.promise.then(
+    this.loadingDate = _util.makeCancelablePromise(
+      _order.getOrderList(this.state)
+    )
+    this.loadingDate.promise.then(
       (res) => {
         this.setState(res)
       },
       (err) => {
         if (err.isCanceled) {
-          console.log('test')
           return
         } else {
           this.setState({
