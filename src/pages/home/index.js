@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PageTitle from 'components/page-title/index.jsx'
-import Util from 'util/util.jsx'
-import Count from 'service/count-service.jsx'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from 'components/page-title';
+import Util from 'util/util.js';
+import Count from 'service/count-service.js';
 
 const _count = new Count()
 const _util = new Util()

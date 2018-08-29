@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PageTitle from 'components/page-title/index.jsx'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from 'components/page-title';
 
 const Error = () => {
   return (

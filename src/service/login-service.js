@@ -1,5 +1,5 @@
-import Util from 'util/util.jsx'
-const _util = new Util()
+import Util from 'util/util.js';
+const _util = new Util();
 
 class UserLogin {
   login(loginInfo) {

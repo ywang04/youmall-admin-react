@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import './index.scss'
-import Util from 'util/util.jsx'
-import UserLogin from 'service/login-service.jsx'
+import React, { Component } from 'react';
+import './index.scss';
+import Util from 'util/util.js';
+import UserLogin from 'service/login-service.js';
 
 const _util = new Util()
 const _user = new UserLogin()

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Util from 'util/util.jsx'
+import React, { Component } from 'react';
+import Util from 'util/util.js';
 
 const _util = new Util()
 

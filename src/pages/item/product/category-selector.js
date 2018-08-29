@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Item from 'service/item-service.jsx'
-import Util from 'util/util.jsx'
-const _item = new Item()
-const _util = new Util()
-import './category-selector.scss'
+import React, { Component } from 'react';
+import Item from 'service/item-service.js';
+import Util from 'util/util.js';
+const _item = new Item();
+const _util = new Util();
+import './category-selector.scss';
 
 class CategorySelector extends Component {
   constructor(props) {
@@ -37,9 +37,9 @@ class CategorySelector extends Component {
         primaryId: nextProps.parentCategoryId,
         secondaryId: nextProps.categoryId
       },
-      () => {
-        parentCategoryIdChange && this.loadSecondaryCategoryList()
-      }
+        () => {
+          parentCategoryIdChange && this.loadSecondaryCategoryList()
+        }
       )
     }
   }

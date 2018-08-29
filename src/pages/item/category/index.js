@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PageTitle from 'components/page-title/index.jsx'
-import Category from 'service/category-service.jsx'
-import TableList from 'util/table-list/index.jsx'
-import Util from 'util/util.jsx'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from 'components/page-title';
+import Category from 'service/category-service.js';
+import TableList from 'util/table-list';
+import Util from 'util/util.js';
 
 const _category = new Category()
 const _util = new Util()

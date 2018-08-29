@@ -1,30 +1,27 @@
-import React, { Component } from 'react'
-import Order from 'service/order-service.jsx'
-import Util from 'util/util.jsx'
-
-const _order = new Order()
-const _util = new Util()
+import React, { Component } from 'react';
+import './search-bar.scss';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      orderNo: ''
+      searchType: 'productId',
+      searchKeyword: ''
     }
   }
+
   onFormSubmit(event) {
     event.preventDefault()
   }
 
   onValueChange(event) {
-    let newValue = event.target.value.trim()
-    this.setState({
-      orderNo: newValue
-    })
+    let name = event.target.name
+    let value = event.target.value.trim()
+    this.setState({ [name]: value })
   }
 
   onButtonSearch() {
-    this.props.searchOrder(this.state.orderNo)
+    this.props.onButtonSearch(this.state.searchType, this.state.searchKeyword)
   }
 
   render() {
@@ -33,13 +30,16 @@ class SearchBar extends Component {
         <div className="col-md-12">
           <form className="form-inline" onSubmit={this.onFormSubmit}>
             <div className="form-group">
-              <select className="form-control">
-                <option value="productId">By Order</option>
+              <select className="form-control" name="searchType" onChange={(event) => {
+                this.onValueChange(event)
+              }}>
+                <option value="productId">By ID</option>
+                <option value="productName">By Name</option>
               </select>
             </div>
 
             <div className="form-group">
-              <input type="text" className="form-control" placeholder="Order Number" onChange={(event) => {
+              <input type="text" className="form-control" name="searchKeyword" placeholder="Keyword" onChange={(event) => {
                 this.onValueChange(event)
               }} />
             </div>
@@ -53,7 +53,6 @@ class SearchBar extends Component {
       </div>
     )
   }
-
 }
 
 export default SearchBar

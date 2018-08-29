@@ -7,7 +7,7 @@ let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev'
 console.log(WEBPACK_ENV)
 
 module.exports = {
-  entry: './src/app.jsx',
+  entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//s.youmall.co/youmall-admin-react/dist',
@@ -23,9 +23,9 @@ module.exports = {
   },
   module: {
     rules: [
-      // jsx
+      // js
       {
-        test: /\.jsx$/,
+        test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',

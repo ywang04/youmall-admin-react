@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PageTitle from 'components/page-title/index.jsx'
-import Order from 'service/order-service.jsx'
-import SearchBar from 'pages/order/search-bar.jsx'
-import TableList from 'util/table-list/index.jsx'
-import Pagination from 'util/pagination/index.jsx'
-import Util from 'util/util.jsx'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from 'components/page-title';
+import Order from 'service/order-service.js';
+import SearchBar from 'pages/order/search-bar.js';
+import TableList from 'util/table-list';
+import Pagination from 'util/pagination';
+import Util from 'util/util.js';
 
 const _util = new Util()
 const _order = new Order()

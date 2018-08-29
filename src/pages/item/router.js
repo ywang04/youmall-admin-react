@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import ItemList from 'pages/item/product/index.jsx'
-import ItemAdd from 'pages/item/product/item-add.jsx'
-import ItemDetail from 'pages/item/product/item-detail.jsx'
-import CategoryList from 'pages/item/category/index.jsx'
-import CategoryAdd from 'pages/item/category/category-add.jsx'
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import ItemList from 'pages/item/product';
+import ItemAdd from 'pages/item/product/item-add.js';
+import ItemDetail from 'pages/item/product/item-detail.js';
+import CategoryList from 'pages/item/category';
+import CategoryAdd from 'pages/item/category/category-add.js';
 
 class ItemRouter extends Component {
   render() {

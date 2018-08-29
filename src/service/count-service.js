@@ -1,4 +1,4 @@
-import Util from 'util/util.jsx'
+import Util from 'util/util.js';
 const _util = new Util()
 
 class Count {

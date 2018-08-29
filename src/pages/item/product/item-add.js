@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import PageTitle from 'components/page-title/index.jsx'
-import CategorySelector from './category-selector.jsx'
-import FileUploader from 'util/file-upload/index.jsx'
-import Editor from 'util/editor/index.jsx'
-import Util from 'util/util.jsx'
-import Item from 'service/item-service.jsx'
-import './item-add.scss'
+import React, { Component } from 'react';
+import PageTitle from 'components/page-title';
+import CategorySelector from './category-selector';
+import FileUploader from 'util/file-upload';
+import Editor from 'util/editor';
+import Util from 'util/util.js';
+import Item from 'service/item-service.js';
+import './item-add.scss';
 
 const _util = new Util()
 const _item = new Item()

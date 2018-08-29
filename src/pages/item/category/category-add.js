@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import PageTitle from 'components/page-title/index.jsx'
-import Util from 'util/util.jsx'
-import Category from 'service/category-service.jsx'
+import React, { Component } from 'react';
+import PageTitle from 'components/page-title';
+import Util from 'util/util.js';
+import Category from 'service/category-service.js';
 
 const _util = new Util()
 const _category = new Category()

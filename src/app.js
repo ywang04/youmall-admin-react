@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import Home from 'pages/home/index.jsx'
-import Layout from 'components/layout/index.jsx'
-import Login from 'pages/login/index.jsx'
-import ErrorPage from 'pages/error/index.jsx'
-import UserList from 'pages/user/index.jsx'
-import ItemRouter from 'pages/item/router.jsx'
-import OrderList from 'pages/order/index.jsx'
-import OrderDetail from 'pages/order/order-detail.jsx'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Layout from 'components/layout';
+import Home from 'pages/home';
+import ItemRouter from 'pages/item/router.js';
+import OrderList from 'pages/order';
+import OrderDetail from 'pages/order/order-detail.js';
+import UserList from 'pages/user';
+import ErrorPage from 'pages/error';
+import Login from 'pages/login';
 
 class App extends Component {
   render() {

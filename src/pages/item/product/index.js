@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PageTitle from 'components/page-title/index.jsx'
-import SearchBar from './search-bar.jsx'
-import TableList from 'util/table-list/index.jsx'
-import Pagination from 'util/pagination/index.jsx'
-import Item from 'service/item-service.jsx'
-import Util from 'util/util.jsx'
-import './index.scss'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from 'components/page-title';
+import SearchBar from './search-bar.js';
+import TableList from 'util/table-list';
+import Pagination from 'util/pagination';
+import Item from 'service/item-service.js';
+import Util from 'util/util.js';
+import './index.scss';
 
 const _item = new Item()
 const _util = new Util()
@@ -26,15 +26,17 @@ class ItemList extends Component {
   }
 
   loadItemList() {
-    _item.getItemList(this.state).then((res) => {
-      this.setState(res)
-    }, (errMsg) => {
-      this.setState({ list: [] })
-      if (errMsg === 'Bad Request') {
-        errMsg = 'Item does not exist.'
-      }
-      _util.errorTips(errMsg)
-    })
+    _item.getItemList(this.state).then(
+      (res) => {
+        this.setState(res)
+      },
+      (errMsg) => {
+        this.setState({ list: [] })
+        if (errMsg === 'Bad Request') {
+          errMsg = 'Item does not exist.'
+        }
+        _util.errorTips(errMsg)
+      })
   }
 
   onButtonSearch(searchType, searchKeyword) {

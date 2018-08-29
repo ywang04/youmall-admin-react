@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import PageTitle from 'components/page-title/index.jsx'
-import Order from 'service/order-service.jsx'
-import TableList from 'util/table-list/index.jsx'
-import Util from 'util/util.jsx'
-import './order-detail.scss'
+import React, { Component } from 'react';
+import PageTitle from 'components/page-title';
+import Order from 'service/order-service.js';
+import TableList from 'util/table-list';
+import Util from 'util/util.js';
+import './order-detail.scss';
 
 const _util = new Util()
 const _order = new Order()

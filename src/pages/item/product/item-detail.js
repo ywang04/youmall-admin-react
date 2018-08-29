@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import PageTitle from 'components/page-title/index.jsx'
-import CategorySelector from './category-selector.jsx'
-import Util from 'util/util.jsx'
-import Item from 'service/item-service.jsx'
+import React, { Component } from 'react';
+import PageTitle from 'components/page-title';
+import CategorySelector from './category-selector';
+import Util from 'util/util.js';
+import Item from 'service/item-service.js';
 
 import './item-add.scss'
 

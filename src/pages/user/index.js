@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import PageTitle from 'components/page-title/index.jsx'
-import TableList from 'util/table-list/index.jsx'
-import Pagination from 'util/pagination/index.jsx'
-import Util from 'util/util.jsx'
-import GetUserList from 'service/user-service.jsx'
+import React, { Component } from 'react';
+import PageTitle from 'components/page-title';
+import TableList from 'util/table-list';
+import Pagination from 'util/pagination';
+import Util from 'util/util.js';
+import GetUserList from 'service/user-service.js';
 
 const _util = new Util()
 
