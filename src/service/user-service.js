@@ -13,4 +13,4 @@ const GetUserList = (pageNum) => {
   })
 }
 
-export default GetUserList
+export default GetUserList;
