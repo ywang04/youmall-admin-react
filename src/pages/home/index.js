@@ -4,10 +4,10 @@ import PageTitle from 'components/page-title';
 import Util from 'util/util.js';
 import Count from 'service/count-service.js';
 
-const _count = new Count()
-const _util = new Util()
+const _count = new Count();
+const _util = new Util();
 
-import './index.scss'
+import './index.scss';
 
 class Home extends Component {
   constructor(props) {
@@ -20,10 +20,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.fetchCount()
+    this.fetchCount();
   }
 
-  fetchCount() {
+  fetchCount = () => {
     _count.statistic().then(
       (res) => {
         this.setState({
@@ -31,11 +31,10 @@ class Home extends Component {
           itemCount: res.productCount,
           orderCount: res.orderCount
         })
-      },
-      (errMsg) => {
-        _util.errorTips(errMsg)
       }
-    )
+    ).catch((errMsg) => {
+      _util.errorTips(errMsg)
+    });
   }
 
   render() {
@@ -79,4 +78,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default Home;
