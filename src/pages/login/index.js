@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './index.scss';
-import Util from 'util/util.js';
-import UserLogin from 'service/login-service.js';
+import Util from 'util';
+import { Auth } from '../../service';
 
-const _util = new Util()
-const _user = new UserLogin()
+const _util = new Util();
+const _auth = new Auth();
 
 class Login extends Component {
   constructor(props) {
@@ -17,41 +17,52 @@ class Login extends Component {
   }
 
   componentWillMount() {
-    document.title = 'Login | YOU MALL'
+    document.title = 'Login | YOU MALL';
   }
 
-  onInputChange(event) {
-    let inputName = event.target.name
+  onInputChange = (event) => {
+    let inputName = event.target.name;
     this.setState({
       [inputName]: event.target.value
     })
   }
 
-  onFormSubmit(event) {
-    event.preventDefault()
+  onFormSubmit = (event) => {
+    event.preventDefault();
   }
 
-  onButtonSubmit() {
-    let loginInfo = {
+  onButtonSubmit = () => {
+    const loginInfo = {
       username: this.state.username,
       password: this.state.password
     }
-    let checkResult = _user.checkLoginInfo(loginInfo)
+    const checkResult = _auth.checkLoginInfo(loginInfo);
     if (checkResult.status) {
-      _user.login(loginInfo).then(
-        (res) => {
-          _util.setStorage('userInfo', res)
-          this.props.history.push(this.state.redirect)
-        },
-        (errMsg) => {
-          if (errMsg === '密码错误') {
-            errMsg = 'Invalid  Username or Password.'
-            _util.errorTips(errMsg)
+      // _auth.login(loginInfo).then(
+      //   (res) => {
+      //     _util.setStorage('userInfo', res)
+      //     this.props.history.push(this.state.redirect)
+      //   },
+      //   (errMsg) => {
+      //     if (errMsg === '密码错误') {
+      //       errMsg = 'Invalid  Username or Password.'
+      //       _util.errorTips(errMsg)
+      //     }
+      //   }
+      // )
+      _auth.login(loginInfo).then(serviceResult => {
+        if (serviceResult.status === 1) {
+          _util.setStorage('userInfo', serviceResult.data);
+          this.props.history.push(this.state.redirect);
+        } else {
+          if (serviceResult.msg === '用户名不存在' || '密码错误') {
+            const errMsg = 'Invalid  Username or Password.';
+            _util.errorTips(errMsg);
           }
         }
-      )
+      })
     } else {
-      _util.errorTips(checkResult.msg)
+      _util.errorTips(checkResult.msg);
     }
   }
 
@@ -97,4 +108,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Login;

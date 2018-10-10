@@ -2,15 +2,15 @@ class Util {
   // param is passing as an object
   // the return result of request function is a Promise object
   doLogin() {
-    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname)
+    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
   }
 
   successTips(successMsg) {
-    alert(successMsg || 'Successful!')
+    alert(successMsg || 'Successful!');
   }
 
   errorTips(errMsg) {
-    alert(errMsg || 'Failed!')
+    alert(errMsg || 'Failed!');
   }
 
   getUrlParam(param) {
@@ -21,21 +21,21 @@ class Util {
   }
 
   setStorage(name, data) {
-    let dataType = typeof data
+    const dataType = typeof data;
     // JSON type
     if (dataType === 'object') {
-      window.localStorage.setItem(name, JSON.stringify(data))
+      window.localStorage.setItem(name, JSON.stringify(data));
     }
     else if (['number', 'sting', 'boolean'].indexOf(dataType) >= 0) {
-      window.localStorage.setItem(name, data)
+      window.localStorage.setItem(name, data);
     }
     else {
-      alert('This type is not suitable for LocalStorage')
+      alert('This type is not suitable for LocalStorage');
     }
   }
 
   getStorage(name) {
-    let data = window.localStorage.getItem(name)
+    let data = window.localStorage.getItem(name);
     if (data) {
       return JSON.parse(data)
     } else {
@@ -44,7 +44,7 @@ class Util {
   }
 
   removeStorage(name) {
-    window.localStorage.removeItem(name)
+    window.localStorage.removeItem(name);
   }
 
   request(param) {
@@ -73,7 +73,7 @@ class Util {
   }
 
   makeCancelablePromise(promise) {
-    let hasCanceled_ = false
+    let hasCanceled_ = false;
     const wrappedPromise = new Promise(
       (resolve, reject) => {
         promise.then(
@@ -89,11 +89,11 @@ class Util {
     return {
       promise: wrappedPromise,
       cancel() {
-        hasCanceled_ = true
+        hasCanceled_ = true;
       },
     }
   }
 }
 
 
-export default Util
+export default Util;

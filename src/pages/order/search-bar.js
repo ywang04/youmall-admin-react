@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Order from 'service/order-service.js';
-import Util from 'util/util.js';
+import Util from 'util';
 
 const _order = new Order()
 const _util = new Util()

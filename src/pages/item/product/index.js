@@ -5,11 +5,11 @@ import SearchBar from './search-bar.js';
 import TableList from 'util/table-list';
 import Pagination from 'util/pagination';
 import Item from 'service/item-service.js';
-import Util from 'util/util.js';
+import Util from 'util';
 import './index.scss';
 
-const _item = new Item()
-const _util = new Util()
+const _item = new Item();
+const _util = new Util();
 
 class ItemList extends Component {
   constructor(props) {
@@ -22,87 +22,87 @@ class ItemList extends Component {
   }
 
   componentDidMount() {
-    this.loadItemList()
+    this.loadItemList();
   }
 
-  loadItemList() {
+  loadItemList = () => {
     _item.getItemList(this.state).then(
       (res) => {
-        this.setState(res)
-      },
-      (errMsg) => {
-        this.setState({ list: [] })
-        if (errMsg === 'Bad Request') {
-          errMsg = 'Item does not exist.'
-        }
-        _util.errorTips(errMsg)
-      })
+        this.setState(res);
+      }
+    ).catch((errMsg) => {
+      this.setState({ list: [] })
+      if (errMsg === 'Bad Request') {
+        errMsg = 'Item does not exist.';
+      }
+      _util.errorTips(errMsg);
+    })
   }
 
-  onButtonSearch(searchType, searchKeyword) {
-    let loadType = searchKeyword === '' ? 'list' : 'search'
+  onButtonSearch = (searchType, searchKeyword) => {
+    const loadType = searchKeyword === '' ? 'list' : 'search';
     this.setState({
       loadType: loadType,
       pageNum: 1,
       searchType: searchType,
       searchKeyword: searchKeyword
     }, () => {
-      this.loadItemList()
+      this.loadItemList();
     })
   }
 
-  onItemStatusChange(itemId, currStatus) {
-    let confirmTips = currStatus === 1 ? 'Are you sure you want to remove this listing?' : 'Are you sure you want to list this item?'
-    let newStatus = currStatus === 1 ? 2 : 1
+  onItemStatusChange = (itemId, currStatus) => {
+    let confirmTips = currStatus === 1 ? 'Are you sure you want to remove this listing?' : 'Are you sure you want to list this item?';
+    let newStatus = currStatus === 1 ? 2 : 1;
     let itemInfo = {
       productId: itemId,
       status: newStatus
-    }
+    };
     if (window.confirm(confirmTips)) {
       _item.changeItemStatus(itemInfo).then((res) => {
-        this.loadItemList()
-      }, (errMsg) => {
-        _util.errorTips(errMsg)
+        this.loadItemList();
+      }).catch((errMsg) => {
+        _util.errorTips(errMsg);
       })
     }
   }
 
-  onPageNumChange(current) {
+  onPageNumChange = (current) => {
     this.setState({
       pageNum: current
     }, () => {
-      this.loadItemList()
+      this.loadItemList();
     })
   }
 
-  render() {
-    let listBody = this.state.list.map((item, index) => {
-      return (
-        <tr key={item.id}>
-          <td>{item.id}</td>
-          <td>{item.name}</td>
-          <td>$ {item.price}</td>
-          <td>
-            <span id="id-span-status">{
-              item.status === 1 ? 'Active' : 'Inactive'
-            }</span>
-            <button type="button" className="btn btn-xs btn-warning" onClick={() => {
-              this.onItemStatusChange(item.id, item.status)
-            }}>
-              {
-                item.status === 1 ? 'Inactive' : 'Active'
-              }
-            </button>
-          </td>
-          <td>
-            <Link className="action" to={`/item/detail/${item.id}`}>View</Link>
-            <Link className="action" to={`/item/save/${item.id}`}>Edit</Link>
-          </td>
-        </tr>
-      )
-    })
+  renderListBody = (item) => {
+    return (
+      <tr key={item.id}>
+        <td>{item.id}</td>
+        <td>{item.name}</td>
+        <td>$ {item.price}</td>
+        <td>
+          <span id="id-span-status">{
+            item.status === 1 ? 'Active' : 'Inactive'
+          }</span>
+          <button type="button" className="btn btn-xs btn-warning" onClick={() => {
+            this.onItemStatusChange(item.id, item.status)
+          }}>
+            {
+              item.status === 1 ? 'Inactive' : 'Active'
+            }
+          </button>
+        </td>
+        <td>
+          <Link className="action" to={`/item/detail/${item.id}`}>View</Link>
+          <Link className="action" to={`/item/save/${item.id}`}>Edit</Link>
+        </td>
+      </tr>
+    )
+  }
 
-    let tableHeaders = [
+  render() {
+    const tableHeaders = [
       {
         name: 'ID',
         width: '10%'
@@ -119,7 +119,11 @@ class ItemList extends Component {
         name: 'Action',
         width: '15%'
       }
-    ]
+    ];
+
+    const listBody = this.state.list.map((item) => {
+      return this.renderListBody(item);
+    });
 
     return (
       <div id="page-wrapper">
@@ -146,4 +150,4 @@ class ItemList extends Component {
   }
 }
 
-export default ItemList
+export default ItemList;

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PageTitle from 'components/page-title';
 import Category from 'service/category-service.js';
 import TableList from 'util/table-list';
-import Util from 'util/util.js';
+import { mapDispatchToProps } from '../../../actions';
+import Util from 'util';
 
-const _category = new Category()
-const _util = new Util()
+const _category = new Category();
+const _util = new Util();
 
 class CategoryList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [],
       parentCategoryId: this.props.match.params.id || 0
     }
   }
 
-  componentDidMount() {
-    this.loadCategoryList()
+  async componentDidMount() {
+    this.props.populateCategoryList(this.state);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -27,32 +28,32 @@ class CategoryList extends Component {
     if (preId !== curId) {
       this.setState({
         parentCategoryId: curId || 0
-      }, () => { this.loadCategoryList() })
+      }, () => { this.props.populateCategoryList(this.state) })
     }
   }
 
-  loadCategoryList() {
-    _category.getCategoryList(this.state).then(
-      (res) => {
-        this.setState({
-          list: res
-        })
-      },
-      (errMsg) => {
-        this.setState({
-          list: []
-        })
-        _util.errorTips(errMsg)
-      })
-  }
+  // loadCategoryList = () => {
+  //   _category.getCategoryList(this.state).then(
+  //     (res) => {
+  //       this.setState({
+  //         list: res
+  //       })
+  //     },
+  //     (errMsg) => {
+  //       this.setState({
+  //         list: []
+  //       })
+  //       _util.errorTips(errMsg)
+  //     })
+  // }
 
-  onUpdateCategoryName(categoryId, categoryName) {
+  onUpdateCategoryName = (categoryId, categoryName) => {
     let inputValue = window.prompt('Please input category name.', categoryName)
     if (inputValue) {
       _category.setCategoryName(categoryId, inputValue).then(
         (res) => {
-          _util.successTips('Update category successfully.')
-          this.loadCategoryList()
+          _util.successTips('Update category successfully.');
+          this.props.populateCategoryList(this.state);
         },
         (errMsg) => {
           _util.errorTips(errMsg)
@@ -61,24 +62,29 @@ class CategoryList extends Component {
     }
   }
 
-  render() {
-    let tableHeaders = ['ID', 'Category', 'Action']
-    let tableBody = this.state.list.map((category, index) => {
+  renderTableBody = () => {
+    const { category } = this.props;
+    return category.categoryList.map((element) => {
       return (
-        <tr key={category.id}>
-          <td>{category.id}</td>
-          <td>{category.name}</td>
+        <tr key={element.id}>
+          <td>{element.id}</td>
+          <td>{element.name}</td>
           <td>
-            <a className="action" onClick={() => { this.onUpdateCategoryName(category.id, category.name) }}>Edit</a>
+            <a className="action" onClick={() => { this.onUpdateCategoryName(element.id, element.name) }}>Edit</a>
             {
-              category.parentId === 0
-                ? <Link to={`/item-category/index/${category.id}`}>View</Link>
+              element.parentId === 0
+                ? <Link to={`/item-category/index/${element.id}`}>View</Link>
                 : null
             }
           </td>
         </tr >
       )
     })
+  }
+
+  render() {
+    const tableHeaders = ['ID', 'Category', 'Action'],
+      tableBody = this.renderTableBody();
     return (
       <div id="page-wrapper" >
         <PageTitle title="Category List">
@@ -102,4 +108,10 @@ class CategoryList extends Component {
   }
 }
 
-export default CategoryList
+const mapStateToProps = state => {
+  return {
+    category: state.category
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

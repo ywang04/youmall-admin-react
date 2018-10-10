@@ -13,7 +13,7 @@ import { mapDispatchToProps } from '../../actions';
 class LayoutContainer extends Component {
 
   async componentDidMount() {
-    this.props.populateData();
+    this.props.populateStatisticData();
   }
 
   render() {

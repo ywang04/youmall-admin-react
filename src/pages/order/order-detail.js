@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageTitle from 'components/page-title';
 import Order from 'service/order-service.js';
 import TableList from 'util/table-list';
-import Util from 'util/util.js';
+import Util from 'util';
 import './order-detail.scss';
 
 const _util = new Util()

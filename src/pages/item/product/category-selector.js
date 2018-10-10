@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Item from 'service/item-service.js';
-import Util from 'util/util.js';
+import Util from 'util';
 const _item = new Item();
 const _util = new Util();
 import './category-selector.scss';

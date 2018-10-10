@@ -3,12 +3,12 @@ import PageTitle from 'components/page-title';
 import CategorySelector from './category-selector';
 import FileUploader from 'util/file-upload';
 import Editor from 'util/editor';
-import Util from 'util/util.js';
+import Util from 'util';
 import Item from 'service/item-service.js';
 import './item-add.scss';
 
-const _util = new Util()
-const _item = new Item()
+const _util = new Util();
+const _item = new Item();
 
 
 class ItemAdd extends Component {
@@ -29,10 +29,10 @@ class ItemAdd extends Component {
   }
 
   componentDidMount() {
-    this.loadDetailInfo()
+    this.loadDetailInfo();
   }
 
-  loadDetailInfo() {
+  loadDetailInfo = () => {
     if (this.state.productId) {
       _item.getDetailInfo(this.state.productId).then(
         (res) => {
@@ -45,71 +45,71 @@ class ItemAdd extends Component {
                 url: res.imageHost + img
               }
             })
-            this.setState(res)
+            this.setState(res);
           }
           else {
-            res.subImages = res.subImages.split('')
-            this.setState(res)
+            res.subImages = res.subImages.split('');
+            this.setState(res);
           }
-        },
-        (errMsg) => {
-          _util.errorTips(errMsg)
-        })
+        }
+      ).catch((errMsg) => {
+        _util.errorTips(errMsg);
+      });
     }
   }
 
-  onFormSubmit(event) {
-    event.preventDefault()
+  onFormSubmit = (event) => {
+    event.preventDefault();
   }
 
-  onInputChange(event) {
+  onInputChange = (event) => {
     let name = event.target.name,
-      value = event.target.value.trim()
+      value = event.target.value.trim();
     this.setState({
       [name]: value
     })
   }
 
-  onCategoryChange(categoryId, parentCategoryId) {
+  onCategoryChange = (categoryId, parentCategoryId) => {
     this.setState({
       categoryId: categoryId,
       parentCategoryId: parentCategoryId
     })
   }
 
-  onSuccessUpload(res) {
-    let imgList = this.state.subImages
-    imgList.push(res)
+  onSuccessUpload = (res) => {
+    const imgList = this.state.subImages;
+    imgList.push(res);
     this.setState({
       subImages: imgList
     })
   }
 
-  onFailUpload(errMsg) {
-    _util.errorTips(errMsg)
+  onFailUpload = (errMsg) => {
+    _util.errorTips(errMsg);
   }
 
-  onImageDelete(event) {
-    let index = parseInt(event.target.getAttribute('index'))
-    let imgList = this.state.subImages
+  onImageDelete = (event) => {
+    const index = parseInt(event.target.getAttribute('index'));
+    const imgList = this.state.subImages;
     imgList.splice(index, 1)
     this.setState({
       subImages: imgList
     })
   }
 
-  onEditorValueChange(value) {
+  onEditorValueChange = (value) => {
     this.setState({
       detail: value
     })
   }
 
-  getSubImagesString(subImages) {
-    return subImages.map((subImage) => subImage.uri).toString()
+  getSubImagesString = (subImages) => {
+    return subImages.map((subImage) => subImage.uri).toString();
   }
 
-  onButtonSubmit() {
-    let item = {
+  onButtonSubmit = () => {
+    const item = {
       name: this.state.name,
       subtitle: this.state.subtitle,
       categoryId: parseInt(this.state.categoryId),
@@ -120,23 +120,23 @@ class ItemAdd extends Component {
       status: this.state.status
     }
     if (this.state.productId) {
-      item.id = this.state.productId
+      item.id = this.state.productId;
     }
-    let formCheckValue = _item.checkFormValue(item)
+    let formCheckValue = _item.checkFormValue(item);
 
     if (formCheckValue.status) {
       _item.submitItemForm(item).then((res) => {
         if (res === '更新产品成功') {
-          _util.successTips('Item has been updated.')
+          _util.successTips('Item has been updated.');
         }
         else {
-          _util.successTips('Item has been added.')
+          _util.successTips('Item has been added.');
         }
-        this.props.history.push('/item')
-      }, (errMsg) => { _util.errorTips(errMsg) })
+        this.props.history.push('/item');
+      }).catch((errMsg) => _util.errorTips(errMsg));
     }
     else {
-      _util.errorTips(formCheckValue.msg)
+      _util.errorTips(formCheckValue.msg);
     }
   }
 
@@ -249,4 +249,4 @@ class ItemAdd extends Component {
 }
 
 
-export default ItemAdd
+export default ItemAdd;

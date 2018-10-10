@@ -5,7 +5,7 @@ import Order from 'service/order-service.js';
 import SearchBar from 'pages/order/search-bar.js';
 import TableList from 'util/table-list';
 import Pagination from 'util/pagination';
-import Util from 'util/util.js';
+import Util from 'util';
 
 const _util = new Util()
 const _order = new Order()

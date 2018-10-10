@@ -1,5 +1,5 @@
 import React from 'react';
-import Util from 'util/util.js';
+import Util from 'util';
 
 const _util = new Util()
 

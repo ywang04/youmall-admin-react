@@ -22,4 +22,4 @@ class ItemRouter extends Component {
   }
 }
 
-export default ItemRouter
+export default ItemRouter;

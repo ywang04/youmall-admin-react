@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageTitle from 'components/page-title';
-import Util from 'util/util.js';
+import Util from 'util';
 import Category from 'service/category-service.js';
 
 const _util = new Util()

@@ -1,50 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PageTitle from 'components/page-title';
-import Util from 'util/util.js';
-import Count from 'service/count-service.js';
-
-const _count = new Count();
-const _util = new Util();
-
 import './index.scss';
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      userCount: '-',
-      itemCount: '-',
-      orderCount: '-'
-    }
-  }
-
-  componentDidMount() {
-    this.fetchCount();
-  }
-
-  fetchCount = () => {
-    _count.statistic().then(
-      (res) => {
-        this.setState({
-          userCount: res.userCount,
-          itemCount: res.productCount,
-          orderCount: res.orderCount
-        })
-      }
-    ).catch((errMsg) => {
-      _util.errorTips(errMsg)
-    });
-  }
-
   render() {
+    const { statistic } = this.props;
     return (
       <div id="page-wrapper">
         <PageTitle title="Home" />
         <div className="row">
           <div className="col-md-4">
             <Link className="box-color brown" to="/user">
-              <p className="count">{this.state.userCount}</p>
+              <p className="count">{statistic.userCount}</p>
               <p className="desc">
                 <i className="fa fa-user-o"></i>
                 <span>Total Users</span>
@@ -54,7 +23,7 @@ class Home extends Component {
 
           <div className="col-md-4">
             <Link className="box-color green" to="/item">
-              <p className="count">{this.state.itemCount}</p>
+              <p className="count">{statistic.productCount}</p>
               <p className="desc">
                 <i className="fa fa-list"></i>
                 <span>Total Items</span>
@@ -64,7 +33,7 @@ class Home extends Component {
 
           <div className="col-md-4">
             <Link className="box-color blue" to="/order">
-              <p className="count">{this.state.orderCount}</p>
+              <p className="count">{statistic.orderCount}</p>
               <p className="desc">
                 <i className="fa fa-check-square-o"></i>
                 <span>Total Orders</span>
@@ -78,4 +47,11 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    statistic: state.statistic
+  }
+}
+
+
+export default connect(mapStateToProps)(Home);

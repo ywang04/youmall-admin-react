@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageTitle from 'components/page-title';
 import CategorySelector from './category-selector';
-import Util from 'util/util.js';
+import Util from 'util';
 import Item from 'service/item-service.js';
 
 import './item-add.scss'

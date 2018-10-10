@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Util from 'util/util.js';
+import Util from 'util';
 
-const _util = new Util()
+const _util = new Util();
 
 class Item extends Component {
   getItemList({ loadType, pageNum, searchType, searchKeyword }) {

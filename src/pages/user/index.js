@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageTitle from 'components/page-title';
 import TableList from 'util/table-list';
 import Pagination from 'util/pagination';
-import Util from 'util/util.js';
+import Util from 'util';
 import GetUserList from 'service/user-service.js';
 
 const _util = new Util()
