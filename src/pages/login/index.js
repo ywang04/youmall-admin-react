@@ -38,18 +38,6 @@ class Login extends Component {
     }
     const checkResult = _auth.checkLoginInfo(loginInfo);
     if (checkResult.status) {
-      // _auth.login(loginInfo).then(
-      //   (res) => {
-      //     _util.setStorage('userInfo', res)
-      //     this.props.history.push(this.state.redirect)
-      //   },
-      //   (errMsg) => {
-      //     if (errMsg === '密码错误') {
-      //       errMsg = 'Invalid  Username or Password.'
-      //       _util.errorTips(errMsg)
-      //     }
-      //   }
-      // )
       _auth.login(loginInfo).then(serviceResult => {
         if (serviceResult.status === 1) {
           _util.setStorage('userInfo', serviceResult.data);
